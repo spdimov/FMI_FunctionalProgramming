@@ -72,21 +72,21 @@
   
 #! zad 11
 
-(define (filter-accumulate-11 p? op init a next b)
+(define (filter-accumulate p? op init a next b)
   (define (loop i)
     (cond ((> i b) init)
-          ((p? b i) (op i (loop (next i))) )
+          ((p? i) (op i (loop (next i))) )
           (else (loop (next i)))
           ))
   (loop a))
   
-(define (devisor? number a)
-  (if (= (remainder number a) 0)
-      #t
-      #f))
-
 (define (devisors-sum n)
-  (filter-accumulate devisor? + 0 1 (lambda (x) (+ x 1)) n))
+  (define (devisor-n? i)
+    (if (= (remainder n i) 0)
+        #t
+        #f))
+        
+  (filter-accumulate devisor-n? + 0 1 (lambda (x) (+ x 1)) n))
 
 #! zad 12
 (define (filter-accumulate p? op init a next b)
