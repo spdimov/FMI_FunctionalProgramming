@@ -60,17 +60,16 @@
 #! zad9
 
 #! zad10
-
-(define (accumulate-i init a next b)
+(define (accumulate-i init op a next b)
   (define (loop result i)
     (if (<= i b)
-        (loop (* result 2) (next i))
+        (loop (op result i) (next i))
         result))
   (loop init a))
 
 (define (2^ n)
-  (accumulate-i 1 1 (lambda (x) (+ x 1)) n))
-
+  (accumulate-i 1 (lambda (x y) (* x 2)) 1 (lambda (x) (+ x 1)) n))
+  
 #! zad 11
 
 (define (filter-accumulate-11 p? op init a next b)
