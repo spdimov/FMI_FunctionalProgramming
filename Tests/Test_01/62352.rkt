@@ -81,14 +81,13 @@
   (define (op x y)
     (if (pred? x)
         (set-add y x)
-        (set-add y 0)))
+        y))
        
 
   (define (id x) x)
   (define (next x) (+ x 1))
   
-  (set-remove (accumulate op id 0 a next b) 0))
-  
+  (accumulate op id 0 a next b))
   
 
         
