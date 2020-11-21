@@ -36,4 +36,4 @@
                (loop (str-sub-rec haystack 1 (- (string-length haystack) 1)) (+ c 1)))      
         )
     )
-  (loop haystack 0))
+  (loop haystack 0)) 
