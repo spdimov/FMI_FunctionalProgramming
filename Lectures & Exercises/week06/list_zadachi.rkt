@@ -56,10 +56,32 @@
 ;;zad6 Да се напише функция (uniques lst), която оставя само уникалните стойности в даден списък. Можете да проверявате за еднаквост с equal? за най-сигурно
 
 (define (filter p? lst)
-  (cond ((null? lst) '())
+  (cond ((null? lst) lst)
         ((p? (car lst)) (cons (car lst) (filter p? (cdr lst))))
         (else (filter p? (cdr lst)))
         )
   )
 
+(define (uniques lst)
+  (cond ((null? lst) lst)
+        (else (cons (car lst) (uniques (filter (lambda (x) (not (= x (car lst)))) (cdr lst)))))
+        )
+  )
+
+;;zad7 Да се напише функция (insert val lst), която вмъква стойността val на правилното място в сортирания в ненамаляващ ред списък lst
+
+(define (insert val lst)
+  (cond ((null? lst) (list val))
+        ((>= val (car lst)) (cons (car lst) (insert val (cdr lst))))
+        (else (cons val lst))
+        )
+  )
+
+;;zad8 Да се напише функция (insertion-sort lst), която прави точно това, което подсказва името ѝ:
+
+(define (insertion-sort lst)
+    (cond ((null? lst) lst)
+          (else (insert (car lst) (insertion-sort (cdr lst))))
+          )
+  )
   
