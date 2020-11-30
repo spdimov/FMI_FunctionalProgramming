@@ -54,16 +54,16 @@
      (left-shift 1 elem)))
 
 (define (valid->nset n)
-  (define (loop number curr set)
+  (define (loop number curr set pos)
     (if (= number 0)
-        (set-add set curr)
-        (cond ((= (last-digit number) 0) (loop (without-last-digit number) 0 (set-add set curr)))
-              (else (loop (without-last-digit number) (+ (* 10 curr) (last-digit number)) set))
+        (set-remove (set-add set curr) 0)
+        (cond ((= (last-digit number) 0) (loop (without-last-digit number) 0 (set-add set curr) 1))
+              (else (loop (without-last-digit number) (+ curr (* pos (last-digit number))) set (* pos 10)))
               )
         )
     )
   (if (number-valid? n)
-      (loop n 0 0)
+      (loop n 0 0 1)
       #f))
 
 ;;zad3
